@@ -216,6 +216,10 @@ wave while running nothing:
   subject: the revision it migrates to, the route it drives, the symbol it imports. One wave named
   the test of migration 071 as the downgrade witness of 074; it never runs 074. A witness that
   cannot reach its subject is replaced, or the row says the gate has none.
+- **A file-count forecast counts the files the plan creates.** A gate that reports how many
+  files it checked (a type checker's "N source files", a linter's file total) moves with every
+  `Create:` inside its scope, support modules and test helpers included. One wave missed that
+  forecast by one in two links, each time on a new helper module.
 - **Profile § Prep checks**, each one, against every plan.
 - **A close task's diff range starts at the link base, not the wave base.** A range from the
   wave base reads every earlier link's commits as this link's.
