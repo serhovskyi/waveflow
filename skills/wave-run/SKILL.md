@@ -103,6 +103,7 @@ For each task, in order, one at a time:
    A red that proves a gate: commit the implementation first, so the diff shows only the plant; then cp the files, mutate, `<evidence runner> <file> git status --porcelain` and `<evidence runner> <file> git diff -- <files>` first, then the run, then restore from the copy, cmp, and `git diff --exit-code --stat -- <files>`.
    Your commits carry code and tests only. Evidence files are never in them: they stay in the working tree under the task's evidence directory, and the controller lands them after the audit as the task's one record commit.
    Every `EXIT=` you report or record is printed by the shell that ran the command (the evidence runner, or `; echo "EXIT=$?"` on the runner itself, never after a pipe); never type one, and a run without one is run again.
+   Every line of an evidence file is written by the evidence runner; never prepend, append or edit one.
    Reply with exactly four lines: status · commits · tests (one line, Δ) · caveats.
    ```
 
@@ -128,6 +129,11 @@ For each task, in order, one at a time:
    The exit line exists because a close record once carried an `EXIT=0` typed by hand
    beside a suite log with no exit at all, and because `git diff --stat` exits 0 on a
    difference: the restore check proved nothing until `--exit-code`.
+
+   The every-line line exists because the exit line was obeyed to the letter and missed: an
+   implementer ran its plants without the tree header, then prepended the header by hand and
+   typed an `EXIT=0` under it in six files. The per-task audit caught it; a header the runner
+   did not write proves nothing about the tree the run saw.
 
    A full suite log is never committed: the evidence records its command, the summary lines
    profile § Suites names and the runner's `EXIT=`. One full log reached 85 MB.
