@@ -9,7 +9,7 @@ Two plugins, one marketplace, installable separately:
 
 | plugin | what it ships |
 |---|---|
-| `wave-skills` | `wave-grill` before the wave, `wave-prep` · `wave-run` · `wave-close` for it, `wave-retro` after it, and the four reviewer agents they dispatch |
+| `wave-skills` | `wave-grill` before the wave, `wave-prep` · `wave-run` · `wave-close` for it, `wave-retro` after it, `wave-ideal` whenever the owner asks what is left, and the four reviewer agents they dispatch |
 | `wave-harness` | hooks that refuse irreversible git and warn on blind commands, plus `evidence-run`, `absence-check`, `suite-summary` |
 
 They are independent, but they were measured together: the skills' reply contract records every
@@ -140,6 +140,10 @@ outcome. The whole flow, in order:
 6. **Retro, when it went badly** — `/wave-retro` reads the closed wave's records and proposes
    changes to the agents' environment — checks, pointers, reviewer rules, the repo profile —
    for the owner to pick from.
+7. **The gap to ideal, when the owner asks what is left** — `wave-ideal` measures one area
+   against its job, keeps only the gaps that name a concrete failure, and gives each a verdict
+   (do now, fix list, grill, wave, accept) and a "when" relative to the current queue. It
+   implements nothing, and its gaps re-enter the flow at step 2 or as a fix list.
 
 The pipeline below consumes step 4. It does not grill, spec or plan — a wave prepared from an
 ungrilled slice runs fine and ships the wrong thing.
@@ -497,9 +501,11 @@ skills/
 ├── wave-close/
 │   ├── SKILL.md
 │   └── references/templates.md     # link report, relay, post-wave prompt
-└── wave-retro/
-    ├── SKILL.md
-    └── LICENSE, CREDITS.md         # adapted from mattpocock/skills, MIT
+├── wave-retro/
+│   ├── SKILL.md
+│   └── LICENSE, CREDITS.md         # adapted from mattpocock/skills, MIT
+└── wave-ideal/
+    └── SKILL.md
 THIRD-PARTY-NOTICES.md              # what is adapted from where, and its license
 ```
 
