@@ -88,9 +88,14 @@ For each task, in order, one at a time:
 2. Write `git rev-parse HEAD` into the ledger as the task base, then dispatch the
    implementer **with the model named** from the link prompt's table.
 
-   The dispatch prompt is exactly five parts, in this order: one line of context · the
-   brief path · interfaces produced by earlier tasks · the report path · the reply
-   contract. Anything else you are tempted to add is already in the brief.
+   The dispatch prompt is exactly six parts, in this order: one line of context · the
+   brief path · the plan's gate-table rows that name this task, verbatim (or "no gate
+   rows") · interfaces produced by earlier tasks · the report path · the reply contract.
+   Anything else you are tempted to add is already in the brief.
+
+   The gate-rows part exists because `task-brief` extracts only the task's own section,
+   while the plants live in the plan's gate table: one implementer finished a task with
+   none of its three plants run, and the task cost a resume to plant them.
 
    The reply contract is fixed text, because no brief carries it: the lines below,
    verbatim, with profile § Reply contract inserted where marked, also verbatim.
